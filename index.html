@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Court Booking</title>
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">
   <script>
-    window.location.replace("https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0");
+    // 1. Grab the current URL and strip out fbclid and other Facebook tracking garbage
+    var targetUrl = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
+    
+    // 2. Immediately redirect cleanly, keeping Facebook's tracker from polluting the GAS session
+    window.location.replace(targetUrl);
   </script>
 </head>
 <body>
-  <script>
-    // Fallback inline redirect if top-level replacement is blocked
-    window.top.location.href = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
-  </script>
 </body>
 </html>
