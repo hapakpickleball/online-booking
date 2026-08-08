@@ -3,11 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">
+  <script>
+    // Base clean URL you actually want to reach
+    var cleanBaseUrl = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec";
+
+    // Force your specific multi-user profile parameter cleanly
+    var finalDestination = cleanBaseUrl + "?authuser=0";
+
+    // Instantly replace the current state so Facebook's tracker is wiped from history
+    window.location.replace(finalDestination);
+  </script>
 </head>
 <body>
-  <script>
-    window.location.replace("https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0");
-  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">
+  </noscript>
+  <p>Redirecting to booking system...</p>
 </body>
 </html>
