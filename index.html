@@ -5,16 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Court Booking</title>
   <script>
-    // 1. Define your base Google Apps Script execution endpoint
-    var baseGasUrl = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
+    // 1. Capture the raw query parameters coming from Facebook
+    var params = new URLSearchParams(window.location.search);
     
-    // 2. Immediately replace the history state to wipe any incoming fbclid from the address bar
-    if (window.location.search.includes('fbclid')) {
-      window.history.replaceState({}, document.title, window.location.pathname);
+    // 2. Explicitly delete Facebook's tracking parameter
+    params.delete('fbclid');
+    
+    // 3. Ensure authuser is preserved if needed
+    if (!params.has('authuser')) {
+      params.set('authuser', '0');
     }
     
-    // 3. Redirect cleanly to your app
-    window.location.replace(baseGasUrl);
+    // 4. Construct the clean destination URL dynamically without the tracker
+    var cleanQuery = params.toString() ? '?' + params.toString() : '';
+    var destination = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec" + cleanQuery;
+    
+    // 5. Execute the clean redirect
+    window.location.replace(destination);
   </script>
 </head>
 <body>
