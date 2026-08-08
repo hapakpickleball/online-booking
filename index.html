@@ -2,25 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Court Booking Redirect</title>
+  <title>Court Booking</title>
+  <meta http-equiv="refresh" content="0; url=https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">
   <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-      // The clean destination URL with your multi-user profile parameter
-      var targetUrl = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
-
-      // Create a hidden link element programmatically
-      var cleanLink = document.createElement('a');
-      cleanLink.href = targetUrl;
-      document.body.appendChild(cleanLink);
-
-      // Programmatically trigger a click event to bypass Facebook's auto-redirect block
-      cleanLink.click();
-    });
+    window.location.replace("https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0");
   </script>
 </head>
 <body>
-  <p style="text-align:center; margin-top:50px; font-family:sans-serif;">
-    Redirecting to booking system...
-  </p>
+  <script>
+    // Fallback inline redirect if top-level replacement is blocked
+    window.top.location.href = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
+  </script>
 </body>
 </html>
