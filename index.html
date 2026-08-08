@@ -2,15 +2,25 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redirecting to Court Booking...</title>
-  <!-- This forces the browser to jump immediately without waiting for JS -->
-  <meta http-equiv="refresh" content="0;url=https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">
+  <title>Court Booking Redirect</title>
   <script>
-    // Backup JS redirect
-    window.location.replace("https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0");
+    window.addEventListener('DOMContentLoaded', (event) => {
+      // The clean destination URL with your multi-user profile parameter
+      var targetUrl = "https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0";
+
+      // Create a hidden link element programmatically
+      var cleanLink = document.createElement('a');
+      cleanLink.href = targetUrl;
+      document.body.appendChild(cleanLink);
+
+      // Programmatically trigger a click event to bypass Facebook's auto-redirect block
+      cleanLink.click();
+    });
   </script>
 </head>
 <body>
-  <p>If you are not redirected automatically, <a href="https://script.google.com/macros/s/AKfycbwVLpVR5M7weirufNnOU7yz8eAtqtXDBwc2hKk291_K8ENUKB5SWbhlowBMVY27sU4b2w/exec?authuser=0">click here</a>.</p>
+  <p style="text-align:center; margin-top:50px; font-family:sans-serif;">
+    Redirecting to booking system...
+  </p>
 </body>
 </html>
