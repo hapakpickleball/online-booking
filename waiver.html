@@ -94,7 +94,7 @@
       padding: 16px;
       font-size: 13px;
       line-height: 1.6;
-      max-height: 240px;
+      max-height: 280px;
       overflow-y: auto;
       margin-bottom: 20px;
       color: var(--text-main);
@@ -174,7 +174,8 @@
       margin: 12px auto !important;
     }
 
-    button { 
+    /* Exact button design match from main application */
+    button, .btn-link { 
       background: var(--blue-accent) !important; 
       color: #ffffff !important; 
       border: 1px solid var(--blue-bright) !important; 
@@ -182,6 +183,7 @@
       cursor: pointer;
       margin-top: clamp(20px, 2.5vw, 28px); 
       text-align: center; 
+      text-decoration: none; 
       display: block; 
       border-radius: 10px; 
       padding: clamp(14px, 1.6vw, 16px); 
@@ -193,9 +195,10 @@
       width: 100%;
     }
 
-    button:hover { 
+    button:hover, .btn-link:hover { 
       background: var(--blue-bright) !important; 
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(20, 40, 160, 0.35) !important;
     }
 
     button:disabled {
@@ -205,14 +208,23 @@
       box-shadow: none !important;
       background: #cbd5e1 !important;
       color: var(--text-muted) !important;
+      border-color: transparent !important;
     }
 
-    .btn-secondary {
+    .btn-light-aesthetic { 
       background: #ffffff !important; 
       color: var(--blue-dark) !important; 
       border: 1px solid var(--border-color) !important;
       box-shadow: none !important;
-      margin-top: 10px;
+      margin-top: 14px; 
+    }
+    
+    .btn-light-aesthetic:hover, .btn-light-aesthetic:focus { 
+      border-color: var(--blue-accent) !important;
+      color: var(--blue-accent) !important;
+      box-shadow: 0 0 0 3px rgba(20, 40, 160, 0.12) !important;
+      background: #ffffff !important;
+      transform: translateY(-1px);
     }
 
     #waiverStatusMessage { 
@@ -225,15 +237,6 @@
     }
     .success { border: 1px solid #c4d4be; color: var(--success-green); background: var(--success-bg); }
     .error { border: 1px solid #fca5a5; color: #991b1b; background: var(--danger-bg); }
-
-    .app-footer {
-      width: 100%;
-      max-width: 680px;
-      margin: 24px auto 10px auto;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
@@ -252,9 +255,7 @@
   <h2>Liability Waiver & Release</h2>
 
   <div class="legal-text-box" id="legalTermsContent">
-    <p><strong>Acknowledgment of Risk & Waiver of Liability:</strong></p>
-    <p>By signing this agreement, I acknowledge that participation in pickleball and related activities at HAPAK Pickleball involves physical exertion and inherent risks, including but not limited to slips, falls, collisions, equipment failure, and personal injury.</p>
-    <p>I voluntarily assume full responsibility for any risk of loss, property damage, or personal injury sustained. I hereby release and hold harmless the facility, owners, employees, and agents from any and all liability.</p>
+    <p>Loading Waiver Provisions...</p>
   </div>
 
   <form id="waiverStandaloneForm" onsubmit="handleFormSubmit(event)">
@@ -297,7 +298,7 @@
 
       <input type="text" id="otpInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" class="otp-input-field" placeholder="000000">
 
-      <button type="button" class="btn-secondary" style="font-size: 12px; padding: 8px 12px;" onclick="requestWaiverOtp()">
+      <button type="button" class="btn-light-aesthetic" style="font-size: 12px; padding: 8px 12px; width: auto; margin: 10px auto 0 auto;" onclick="requestWaiverOtp()">
         Resend Verification Code
       </button>
     </div>
@@ -307,10 +308,6 @@
     <button type="submit" id="submitBtn">I AGREE & SIGN WAIVER</button>
   </form>
 </div>
-
-<footer class="app-footer">
-  <p>© HAPAK Pickleball Court Booking & Management</p>
-</footer>
 
 <script>
   var CURRENT_STEP = 1;
@@ -326,6 +323,49 @@
   function validateEmailFormat(email) {
     var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return re.test(String(email).toLowerCase());
+  }
+
+  // Dynamically load WAIVER1, WAIVER2, etc. from backend settings sheet
+  function loadWaiverBackendText() {
+    if (typeof google !== 'undefined' && google.script) {
+      google.script.run
+        .withSuccessHandler(function(backendSettings) {
+          if (backendSettings) {
+            renderWaiverContentFromSettings(backendSettings);
+          }
+        })
+        .getAppSettings();
+    }
+  }
+
+  function renderWaiverContentFromSettings(settings) {
+    var legalContainer = document.getElementById('legalTermsContent');
+    if (!legalContainer) return;
+    legalContainer.innerHTML = '';
+
+    var waiverKeys = Object.keys(settings).filter(function(k) { return k.indexOf('WAIVER') === 0; });
+    waiverKeys.sort(function(a, b) {
+      var numA = parseInt(a.replace(/\D/g, ''), 10);
+      var numB = parseInt(b.replace(/\D/g, ''), 10);
+      return (isNaN(numA) ? 1 : (isNaN(numB) ? -1 : numA - numB));
+    });
+
+    var hasWaiverRules = false;
+    waiverKeys.forEach(function(k) {
+      var val = settings[k];
+      if (val && String(val).trim() !== '') {
+        hasWaiverRules = true;
+        var p = document.createElement('p');
+        p.style.marginBottom = '8px';
+        p.textContent = String(val).trim();
+        legalContainer.appendChild(p);
+      }
+    });
+
+    if (!hasWaiverRules) {
+      legalContainer.innerHTML = '<p><strong>Acknowledgment of Risk & Waiver of Liability:</strong></p>' +
+        '<p>By signing this agreement, I acknowledge that participation in pickleball and related activities at HAPAK Pickleball involves physical exertion and inherent risks...</p>';
+    }
   }
 
   function checkWaiverAge(dobInput) {
@@ -359,7 +399,6 @@
   function checkExistingWaiver(emailVal) {
     if (!validateEmailFormat(emailVal)) return;
     
-    // Call Apps Script endpoint to check status
     if (typeof google !== 'undefined' && google.script) {
       google.script.run
         .withSuccessHandler(function(res) {
@@ -368,9 +407,12 @@
             var btn = document.getElementById('submitBtn');
             msg.style.display = 'block';
             msg.className = 'success';
-            msg.textContent = '✓ You already have a signed Liability Waiver on file!';
-            btn.textContent = 'WAIVER ALREADY VERIFIED ✓';
-            btn.disabled = true;
+            msg.textContent = '✓ You have a verified Liability Waiver on file. No re-verification required.';
+            btn.textContent = 'CLOSE & AGREE';
+            btn.onclick = function(e) {
+              e.preventDefault();
+              window.location.href = "index.html";
+            };
           }
         })
         .checkWaiverStatus(emailVal);
@@ -447,7 +489,7 @@
             btn.disabled = false;
             btn.textContent = 'VERIFY CODE & COMPLETE SIGNATURE';
             msg.style.display = 'block'; msg.className = 'success';
-            msg.textContent = 'Verification code sent to your email!';
+            msg.textContent = 'Code sent! Please check your email inbox or spam.';
           } else {
             btn.disabled = false;
             btn.textContent = 'I AGREE & SIGN WAIVER';
@@ -481,10 +523,14 @@
       google.script.run
         .withSuccessHandler(function(res) {
           if (res.success) {
-            btn.textContent = 'WAIVER VERIFIED & SIGNED ✓';
+            btn.textContent = 'CLOSE & AGREE';
             msg.style.display = 'block'; msg.className = 'success';
-            msg.textContent = '✓ Thank you! Your liability waiver has been successfully verified and saved.';
+            msg.textContent = '✓ Liability waiver verified and signed successfully!';
             document.getElementById('otpInput').disabled = true;
+            btn.onclick = function(e) {
+              e.preventDefault();
+              window.location.href = "index.html";
+            };
           } else {
             btn.disabled = false;
             btn.textContent = 'VERIFY CODE & COMPLETE SIGNATURE';
@@ -498,6 +544,7 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     fetchClientIp();
+    loadWaiverBackendText();
   });
 </script>
 
