@@ -1,0 +1,505 @@
+<!-- waiver.html – Standalone HAPAK Liability Waiver & Release Page -->
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HAPAK Pickleball - Liability Waiver & Release</title>
+
+  <style>
+    :root {
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-surface: #f1f5f9;
+      --bg-blue-subtle: #f0f4fa;
+      --blue-accent: #1428A0;
+      --blue-bright: #2842c7; 
+      --blue-dark: #0f1f7a;   
+      --border-color: #cbd5e1;
+      --border-accent: #93b1e9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success-green: #4d6641;   
+      --success-bg: #f0f4ef;      
+      --danger-red: #dc2626;
+      --danger-bg: #fef2f2;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body { 
+      width: 100%; 
+      min-height: 100vh;
+      margin: 0; 
+      padding: 0; 
+      background: radial-gradient(circle at 50% 0%, #ebf0fa 0%, var(--bg-light) 70%) !important;
+      background-attachment: fixed !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+    }
+
+    body { 
+      padding: clamp(12px, 3vw, 32px); 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .card { 
+      background: var(--bg-card) !important; 
+      padding: clamp(16px, 3.5vw, 32px); 
+      border-radius: 20px; 
+      border: 1px solid var(--border-color) !important;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+      width: 100%; 
+      max-width: 680px;
+      margin: 0 auto; 
+      overflow: hidden;
+    }
+
+    .app-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      width: 100%;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+    
+    .logo {
+      display: block;
+      width: 160px;
+      max-width: 50%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    h2 { 
+      color: var(--blue-dark) !important; 
+      margin: 0 0 16px 0; 
+      text-align: left; 
+      font-size: clamp(18px, 2.2vw, 22px); 
+      font-weight: 800;
+      text-transform: uppercase; 
+      letter-spacing: 0.8px; 
+    }
+
+    .legal-text-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      color: var(--text-main);
+    }
+
+    label { 
+      font-weight: 700; 
+      display: block; 
+      margin-top: clamp(12px, 1.8vw, 16px); 
+      font-size: clamp(12px, 1.2vw, 14px); 
+      color: var(--blue-dark); 
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, select { 
+      width: 100%;
+      padding: clamp(12px, 1.5vw, 15px); 
+      margin-top: 6px;
+      background: #ffffff !important;
+      color: var(--text-main) !important;
+      border: 1px solid var(--border-color) !important; 
+      border-radius: 10px; 
+      font-family: inherit; 
+      font-size: clamp(13px, 1.3vw, 15px); 
+      transition: all 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--blue-accent) !important;
+      box-shadow: 0 0 0 3px rgba(20, 40, 160, 0.15);
+    }
+
+    input:disabled, select:disabled {
+      background: #f1f5f9 !important;
+      color: var(--text-muted) !important;
+      cursor: not-allowed;
+    }
+
+    .minor-details-box {
+      background: #f8fafc;
+      border: 1px dashed var(--border-accent);
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 14px;
+      display: none;
+    }
+
+    .minor-details-box.show {
+      display: block;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .otp-section-box {
+      display: none;
+      background: #f0f4fa;
+      border: 1px solid var(--border-accent);
+      padding: 16px;
+      border-radius: 12px;
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    .otp-section-box.show {
+      display: block;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .otp-input-field {
+      font-size: 22px !important;
+      letter-spacing: 8px !important;
+      text-align: center !important;
+      font-weight: 800 !important;
+      color: var(--blue-dark) !important;
+      max-width: 240px;
+      margin: 12px auto !important;
+    }
+
+    button { 
+      background: var(--blue-accent) !important; 
+      color: #ffffff !important; 
+      border: 1px solid var(--blue-bright) !important; 
+      font-weight: 700; 
+      cursor: pointer;
+      margin-top: clamp(20px, 2.5vw, 28px); 
+      text-align: center; 
+      display: block; 
+      border-radius: 10px; 
+      padding: clamp(14px, 1.6vw, 16px); 
+      font-size: clamp(13px, 1.3vw, 15px);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      box-shadow: 0 4px 14px rgba(20, 40, 160, 0.25) !important;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    button:hover { 
+      background: var(--blue-bright) !important; 
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed !important;
+      transform: none !important;
+      box-shadow: none !important;
+      background: #cbd5e1 !important;
+      color: var(--text-muted) !important;
+    }
+
+    .btn-secondary {
+      background: #ffffff !important; 
+      color: var(--blue-dark) !important; 
+      border: 1px solid var(--border-color) !important;
+      box-shadow: none !important;
+      margin-top: 10px;
+    }
+
+    #waiverStatusMessage { 
+      margin-top: 16px; 
+      padding: 12px 16px; 
+      border-radius: 10px; 
+      display: none; 
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .success { border: 1px solid #c4d4be; color: var(--success-green); background: var(--success-bg); }
+    .error { border: 1px solid #fca5a5; color: #991b1b; background: var(--danger-bg); }
+
+    .app-footer {
+      width: 100%;
+      max-width: 680px;
+      margin: 24px auto 10px auto;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="app-header-row">
+    <img id="appLogo" src="https://lh3.googleusercontent.com/d/1RkcD0I-qMc5P_HtUw2V80nX5ZbKRY5ef" alt="HAPAK Logo" class="logo">
+    <a href="index.html" style="font-size: 13px; font-weight: 700; color: var(--blue-accent); text-decoration: none;">◀ Back to Booking</a>
+  </div>
+
+  <h2>Liability Waiver & Release</h2>
+
+  <div class="legal-text-box" id="legalTermsContent">
+    <p><strong>Acknowledgment of Risk & Waiver of Liability:</strong></p>
+    <p>By signing this agreement, I acknowledge that participation in pickleball and related activities at HAPAK Pickleball involves physical exertion and inherent risks, including but not limited to slips, falls, collisions, equipment failure, and personal injury.</p>
+    <p>I voluntarily assume full responsibility for any risk of loss, property damage, or personal injury sustained. I hereby release and hold harmless the facility, owners, employees, and agents from any and all liability.</p>
+  </div>
+
+  <form id="waiverStandaloneForm" onsubmit="handleFormSubmit(event)">
+    <div id="waiverInputsContainer">
+      <label for="playerName">Player Full Name *</label>
+      <input type="text" id="playerName" required placeholder="Juan Dela Cruz">
+
+      <label for="playerEmail">Player Email Address *</label>
+      <input type="email" id="playerEmail" required placeholder="juan@gmail.com" onblur="checkExistingWaiver(this.value)">
+
+      <label for="playerDob">Date of Birth *</label>
+      <input type="date" id="playerDob" required onchange="checkWaiverAge(this)">
+
+      <div id="minorFieldsSection" class="minor-details-box">
+        <p style="margin: 0 0 10px 0; font-weight: 800; color: var(--blue-dark); font-size: 13px;">
+          ⚠️ Participant is under 18 years old. Parent / Guardian details required:
+        </p>
+        <label for="guardianName">Parent / Guardian Full Name *</label>
+        <input type="text" id="guardianName" placeholder="Maria Dela Cruz">
+
+        <label for="guardianDob">Parent / Guardian Date of Birth *</label>
+        <input type="date" id="guardianDob">
+
+        <label for="guardianRel">Relationship to Minor *</label>
+        <select id="guardianRel">
+          <option value="">Select Relationship...</option>
+          <option value="Parent">Parent</option>
+          <option value="Legal Guardian">Legal Guardian</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="otpVerificationSection" class="otp-section-box">
+      <p style="margin:0; font-weight:800; color:var(--blue-dark); font-size:14px;">
+        📧 Enter 6-Digit Verification Code
+      </p>
+      <p style="margin: 4px 0 0 0; font-size: 12px; color: var(--text-muted);" id="otpSentNote">
+        We sent a verification code to your email address. Please check your inbox or spam folder.
+      </p>
+
+      <input type="text" id="otpInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" class="otp-input-field" placeholder="000000">
+
+      <button type="button" class="btn-secondary" style="font-size: 12px; padding: 8px 12px;" onclick="requestWaiverOtp()">
+        Resend Verification Code
+      </button>
+    </div>
+
+    <div id="waiverStatusMessage"></div>
+
+    <button type="submit" id="submitBtn">I AGREE & SIGN WAIVER</button>
+  </form>
+</div>
+
+<footer class="app-footer">
+  <p>© HAPAK Pickleball Court Booking & Management</p>
+</footer>
+
+<script>
+  var CURRENT_STEP = 1;
+  var CLIENT_PUBLIC_IP = '112.198.X.X';
+
+  function fetchClientIp() {
+    fetch('https://api.ipify.org?format=json')
+      .then(function(res) { return res.json(); })
+      .then(function(data) { if (data && data.ip) CLIENT_PUBLIC_IP = data.ip; })
+      .catch(function(err) {});
+  }
+
+  function validateEmailFormat(email) {
+    var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  function checkWaiverAge(dobInput) {
+    var val = dobInput.value;
+    var minorSection = document.getElementById('minorFieldsSection');
+    var gName = document.getElementById('guardianName');
+    var gDob = document.getElementById('guardianDob');
+    var gRel = document.getElementById('guardianRel');
+
+    if (!val) {
+      minorSection.classList.remove('show');
+      gName.required = false; gDob.required = false; gRel.required = false;
+      return;
+    }
+
+    var birthDate = new Date(val);
+    var today = new Date();
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+
+    if (age < 18) {
+      minorSection.classList.add('show');
+      gName.required = true; gDob.required = true; gRel.required = true;
+    } else {
+      minorSection.classList.remove('show');
+      gName.required = false; gDob.required = false; gRel.required = false;
+    }
+  }
+
+  function checkExistingWaiver(emailVal) {
+    if (!validateEmailFormat(emailVal)) return;
+    
+    // Call Apps Script endpoint to check status
+    if (typeof google !== 'undefined' && google.script) {
+      google.script.run
+        .withSuccessHandler(function(res) {
+          if (res && res.signed) {
+            var msg = document.getElementById('waiverStatusMessage');
+            var btn = document.getElementById('submitBtn');
+            msg.style.display = 'block';
+            msg.className = 'success';
+            msg.textContent = '✓ You already have a signed Liability Waiver on file!';
+            btn.textContent = 'WAIVER ALREADY VERIFIED ✓';
+            btn.disabled = true;
+          }
+        })
+        .checkWaiverStatus(emailVal);
+    }
+  }
+
+  function getPayload() {
+    var pName = document.getElementById('playerName').value.trim();
+    var pEmail = document.getElementById('playerEmail').value.trim();
+    var pDob = document.getElementById('playerDob').value;
+
+    var birthDate = new Date(pDob);
+    var today = new Date();
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+
+    return {
+      fullName: pName,
+      email: pEmail,
+      dob: pDob,
+      isMinor: (age < 18),
+      guardianName: document.getElementById('guardianName').value.trim(),
+      guardianDob: document.getElementById('guardianDob').value,
+      guardianRel: document.getElementById('guardianRel').value,
+      bookingRef: 'STANDALONE_PAGE'
+    };
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    if (CURRENT_STEP === 1) {
+      requestWaiverOtp();
+    } else if (CURRENT_STEP === 2) {
+      verifyOtpAndSave();
+    }
+  }
+
+  function requestWaiverOtp() {
+    var btn = document.getElementById('submitBtn');
+    var msg = document.getElementById('waiverStatusMessage');
+    var payload = getPayload();
+
+    if (!payload.fullName || !payload.email || !payload.dob) {
+      msg.style.display = 'block'; msg.className = 'error';
+      msg.textContent = 'Please fill in all required fields.';
+      return;
+    }
+
+    if (!validateEmailFormat(payload.email)) {
+      msg.style.display = 'block'; msg.className = 'error';
+      msg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    if (payload.isMinor && (!payload.guardianName || !payload.guardianDob || !payload.guardianRel)) {
+      msg.style.display = 'block'; msg.className = 'error';
+      msg.textContent = 'Please complete all Parent/Guardian details.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending Verification Code...';
+    msg.style.display = 'none';
+
+    if (typeof google !== 'undefined' && google.script) {
+      google.script.run
+        .withSuccessHandler(function(res) {
+          if (res.success) {
+            CURRENT_STEP = 2;
+            document.querySelectorAll('#waiverInputsContainer input, #waiverInputsContainer select').forEach(function(i){ i.disabled = true; });
+            document.getElementById('otpVerificationSection').classList.add('show');
+            document.getElementById('otpSentNote').textContent = "We sent a 6-digit code to " + payload.email + ". Enter it below:";
+            btn.disabled = false;
+            btn.textContent = 'VERIFY CODE & COMPLETE SIGNATURE';
+            msg.style.display = 'block'; msg.className = 'success';
+            msg.textContent = 'Verification code sent to your email!';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'I AGREE & SIGN WAIVER';
+            msg.style.display = 'block'; msg.className = 'error';
+            msg.textContent = res.message;
+          }
+        })
+        .requestWaiverOtp(payload);
+    }
+  }
+
+  function verifyOtpAndSave() {
+    var btn = document.getElementById('submitBtn');
+    var msg = document.getElementById('waiverStatusMessage');
+    var otp = document.getElementById('otpInput').value.trim();
+
+    if (!otp || otp.length !== 6) {
+      msg.style.display = 'block'; msg.className = 'error';
+      msg.textContent = 'Please enter the 6-digit verification code sent to your email.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Verifying Code...';
+    msg.style.display = 'none';
+
+    var payload = getPayload();
+    var userAgent = navigator.userAgent || 'Unknown Device';
+
+    if (typeof google !== 'undefined' && google.script) {
+      google.script.run
+        .withSuccessHandler(function(res) {
+          if (res.success) {
+            btn.textContent = 'WAIVER VERIFIED & SIGNED ✓';
+            msg.style.display = 'block'; msg.className = 'success';
+            msg.textContent = '✓ Thank you! Your liability waiver has been successfully verified and saved.';
+            document.getElementById('otpInput').disabled = true;
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'VERIFY CODE & COMPLETE SIGNATURE';
+            msg.style.display = 'block'; msg.className = 'error';
+            msg.textContent = res.message;
+          }
+        })
+        .verifyWaiverOtpAndSave(payload, otp, CLIENT_PUBLIC_IP, userAgent);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchClientIp();
+  });
+</script>
+
+</body>
+</html>
